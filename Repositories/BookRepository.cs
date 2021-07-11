@@ -17,10 +17,10 @@ namespace BookAPI.Repositories
 
         public async Task<Book> Create(Book book)
         {
-           var s= _context.Books.Add(book);
+            _context.Books.Add(book);
             await _context.SaveChangesAsync();
 
-            return s.Entity;
+            return book;
         }
 
         public async Task Delete(int id)

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BookAPI.Models;
+﻿using BookAPI.Models;
 using BookAPI.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 namespace BookAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -21,6 +24,20 @@ namespace BookAPI.Controllers
         {
             return await _bookRepository.Get();
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult> GetBooks1()
+        //{
+        //    try
+        //    {
+        //        return Ok(await _bookRepository.Get());
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError,"Error retriving data from database");
+        //    }
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBooks(int id)
