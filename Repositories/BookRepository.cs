@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookAPI.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookAPI.Repositories
@@ -10,7 +11,7 @@ namespace BookAPI.Repositories
     {
         private readonly BookContext _context;
 
-        public BookRepository(BookContext context)
+        public BookRepository( BookContext context)
         {
             _context = context;
         }
