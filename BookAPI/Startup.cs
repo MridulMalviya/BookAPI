@@ -26,10 +26,10 @@ namespace BookAPI
         {
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddDbContext<BookContext>(options => options.UseSqlite("Data source=books.db"));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookAPI", Version = "v2" });
             });
         }
 
@@ -40,7 +40,7 @@ namespace BookAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookAPI v2"));
             }
 
             app.UseHttpsRedirection();
