@@ -24,8 +24,8 @@ namespace BookAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IBookRepository, BookRepository>();
-            services.AddDbContext<BookContext>(options => options.UseSqlite("Data source=books.db"));
-            services.AddControllers().AddNewtonsoftJson();
+           // services.AddDbContext<BookContext>(options => options.UseSqlite("Data source=books.db"));
+            services.AddDbContext<BookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookAPI", Version = "v2" });
@@ -46,7 +46,12 @@ namespace BookAPI
 
             app.UseRouting();
 
+            app.UseHsts();
+
+
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
