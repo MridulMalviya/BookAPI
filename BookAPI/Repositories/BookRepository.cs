@@ -33,7 +33,17 @@ namespace BookAPI.Repositories
 
         public async Task<IEnumerable<Book>> Get()
         {
-            return await _context.Books.ToListAsync();
+            try
+            {
+                return await _context.Books.ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+                return null;
+            }
         }
 
         public async Task<Book> Get(int id)

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/shramconnect/databases/Books",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:BookContextConnectionString1",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

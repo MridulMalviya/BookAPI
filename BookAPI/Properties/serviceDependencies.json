@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:BookContextConnectionString1"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:BookContextConnectionString",
+      "suggestion": "true",
+      "ignored": "true"
+    }
+  }
+}

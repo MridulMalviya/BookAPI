@@ -25,11 +25,22 @@ namespace BookAPI
         {
             services.AddScoped<IBookRepository, BookRepository>();
            // services.AddDbContext<BookContext>(options => options.UseSqlite("Data source=books.db"));
-            services.AddDbContext<BookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
+            services.AddDbContext<BookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BookContextConnectionString1")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookAPI", Version = "v2" });
             });
+
+            services.AddControllers();
+
+           // services.AddAutoMapper(typeof(Startup));
+
+            services.AddCors(o => o.AddPolicy("Policy", builder =>
+              {
+                  builder.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+              }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,19 +50,25 @@ namespace BookAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookAPI v2"));
+                app.UseSwaggerUI(c =>
+                {
+                   c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookAPI v2");
+                  //c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseHsts();
+           // app.UseHsts();
 
 
             app.UseAuthorization();
 
-            app.UseAuthentication();
+            // app.UseAuthentication();
+
+            app.UseCors("Policy");
 
             app.UseEndpoints(endpoints =>
             {
